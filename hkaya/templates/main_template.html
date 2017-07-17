@@ -1,0 +1,66 @@
+
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <link rel="stylesheet" type="text/css" href={% static "pstyle.css" %}>
+    <link href="https://fonts.googleapis.com/css?family=Changa" rel="stylesheet">
+   <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> -->
+    <script type="text/javascript" src="my_js_code.js"></script>
+    <title>باجي و باتمان</title>
+    <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+  </head>
+  <body>
+    <div class="head-banner">
+      <div class="head-logo">
+        <h3>باجي و باتمان</h3>
+      </div>
+
+      <div class="head-menu">
+        <ul>  
+          <li><a href="{{root_links.chkoun}}">شكون حنا</a></li>
+          <li><a href="{{root_links.category}}/{{categories.3.id}}/">{{categories.3.name_ar}}</a></li>
+          <li><a href="{{root_links.category}}/{{categories.2.id}}/">{{categories.2.name_ar}}</a></li>
+          <li><a href="{{root_links.category}}/{{categories.1.id}}/">{{categories.1.name_ar}}</a></li>
+          <li><a href="{{root_links.category}}/{{categories.0.id}}/">{{categories.0.name_ar}}</a></li>
+        </ul>
+      </div> 
+
+      <div class="head-submenu">
+          <p>    
+             {% if story_item is not None %}
+               <a href="{{root_links.category}}/{{story_item.category.id}}/">{{story_item.category.name_ar}}</a>
+               >> 
+               <a href="{{root_links.story}}/{{story_item.id}}/">{{story_item.title_ar}}</a>
+               <<	
+             {% elif category_item is not None %}
+               <a href="{{root_links.category}}/{{category_item.id}}/">{{category_item.name_ar}}</a>
+               << 
+             {% endif %}
+               <a href="{{root_links.index}}/">Home</a>
+          </p>
+      </div>
+    </div>
+
+    <div class="core-content">
+      <div class="main-content">
+       {% block main_content_block  %}
+          usually contains stories or story links    
+       {% endblock %}
+      </div> 
+
+      <div class="lateral-tab">
+       {% block secondary_content_block  %}
+          usually contains links to new and old stories  
+       {% endblock %}
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>Posted by: bazik</p>
+      <p>مازالها فارغة</p>
+    </div> 
+  </body>
+</html>

@@ -1,0 +1,50 @@
+﻿
+{% extends "main_template.html" %}
+
+    
+ 
+
+      {% block main_content_block %}
+       <h2> {{story_instance.title_ar}}  </h2>
+       <ol class="chat">
+        {% for conversation_item in conversation_list %}
+          {%  if conversation_item.character.id == 1  %}
+           <li class="other">
+             <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
+             <div class="msg">
+               <p>{{conversation_item.text_ar}}</p>
+               <time>20:17</time>
+            </div>
+          </li>
+          {%  elif conversation_item.character.id == 2  %}
+          <li class="self">
+             <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
+             <div class="msg">
+                <p>{{conversation_item.text_ar}}</p>
+                <time>20:18</time>
+             </div>
+           </li>
+          {% endif %}
+        {% endfor %}
+       </ol>
+    {% endblock %}     
+
+
+    {% block secondary_content_block %} 
+          <div class="novelties"> 
+             <h3>الجديد</h3>   
+             <p>الجديد ١</p>
+             <p>الجديد ١</p>
+             <p>الجديد ١</p>
+             <p>الجديد ١</p>        
+           </div> 
+           <div class="oldies">
+             <h3>القديم</h3>  
+             <p>القديم ٢ </p>
+             <p>القديم ١</p>
+             <p>٣ لقديم ١</p>
+             <p>القديم ٤</p>        
+           </div>     
+    {% endblock %}
+      
+

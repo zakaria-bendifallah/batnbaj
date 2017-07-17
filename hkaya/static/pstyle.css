@@ -24,11 +24,20 @@ body {
   
 }
 
+body a {
+  text-decoration:none;
+  color:inherit;
+}
+
+body a:hover{
+ color:#AE0009;
+}
+
 div.head-banner{
   background:#FFF;
   background-size:cover;
   width:100%;  
-  height:30%;
+  height:15%;
   max-height:20%;
   top:0px;
   marging-left:0px;
@@ -65,7 +74,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', end
 }
 
 div.head-menu{
-  background:black;
+  background:#047287;
   color:white;
   text-align:center;
   position:absolute;
@@ -78,21 +87,20 @@ div.head-menu li{
   font-weight:900;
   font-size:1.3em;
   padding:0em 1.3em;
-  height:20%;
-  max-height:20%;
+  height:100%;
   display:inline;
   text-align:center;
   #margin:auto;
 }
 
 div.head-menu li:hover{
-  color:#000;
-  background:#fb8400;
+  color:#AE0009;
+  background:#88D3E1;
   
 }
 
 div.head-submenu{
-  background:#959595;
+  background:#1890A6;
   color:white;
   text-align:center;
   position:absolute;
@@ -103,10 +111,12 @@ div.head-submenu{
 
 div.head-submenu p{
   text-align: right;
-  padding-right:3%;
-  width:70%;
+  padding-top:0.5em;
+  padding-right:12%;
+  /*width:70%;*/
   float:right;
 }
+
 
 div.head-submenu input[type=text]{
   width:30%
@@ -118,9 +128,10 @@ div.head-submenu input[type=text]{
 }
 
 .core-content{
+  background:#88D3E1;
   margin-top:7px;
   width:100%;
-  height:100%;
+  /*height:100%;*/
   min-width:90%;
   min-height:90%;
   /*position:relative;*/
@@ -129,6 +140,7 @@ div.head-submenu input[type=text]{
 }
 
 div.main-content{
+  background:white;
   width:70%;
   min-width:40%;
   height:100%;
@@ -136,8 +148,14 @@ div.main-content{
   /*max-height:50%;*/
   position:relative;
   float:left;
-  left:30%;
-   
+  left:20%;
+  text-align:right; 
+  padding-top:4em;
+}
+
+.main-content h2{ 
+  text-align:center;
+
 }
 
 div.story-icon{
@@ -164,9 +182,8 @@ div.story-icon{
 }
 
 div.story-icon:hover{
-/* background:#fb8400;*/
-  background: #feccb1; /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #feccb1 0%, #f17432 50%, #ea5507 51%, #fb955e 100%); /* FF3.6-15 */
+  background: #047287; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #047287 0%, #047287 50%, #047287 51%, #fb955e 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(-45deg, #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(135deg, #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feccb1', endColorstr='#fb955e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
@@ -180,19 +197,12 @@ div.story-header{
   /*position:relative;*/
 }
 
-div.verse-header:hover{
-  color:#000;
-  background:#fb8400;
-  border-top-right-radius:5px;
-  border-top-left-radius:5px;
-  /*position:relative;*/
-}
 
 
 .lateral-tab{
   /*background:rgba(0,0,0,0);*/
-  background:#fec280;
-  width:30%;
+  background:#88D3E1;
+  width:20%;
   height:100%;
   /*min-height:100%;*/
   min-width:20%;
@@ -204,7 +214,7 @@ div.verse-header:hover{
 }
 
 .novelties {
-  background:#fec280;
+  background:#88D3E1;
   position:relative;
   font-size:1.2em;
   min-width:80%;
@@ -231,11 +241,11 @@ div.verse-header:hover{
 .novelties p:hover{
   color: black;
   padding-right:0.5em;
-  background:#fb8400;
+  background:#047287;
 }
 
 .oldies {
-  background:#fec280 ;
+  background:#88D3E1 ;
   position:relative;
   font-size:1.2em;
   padding:0.5em 1em;
@@ -259,7 +269,7 @@ div.verse-header:hover{
 .oldies p:hover{
   color: black;
   padding-right:0.5em;
-  background:#fb8400;
+  background:#047287;
 }
 
 /*------------------ chat styles -------------------*/
@@ -517,12 +527,12 @@ input.textarea {
 
 
 /*--------------------------------------------------*/
-footer{
- background:black;
+.footer{
+ background:#047287;
  color:white;
  align:right;
  text-align:right;
  box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 20%);
- position:absolute;
+ position:relative;
  z-index:5;
 }

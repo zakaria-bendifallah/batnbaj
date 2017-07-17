@@ -1,0 +1,41 @@
+
+
+{% extends "main_template.html" %}
+        
+
+
+        {% block main_content_block %}
+          {% if category_item is None %}
+             <h2> no category </h2>
+          {% else %}
+             <h2> {{category_item.name_ar}} </h2> 
+          {% endif %}
+         {%  for story_item in story_list %}
+          <a href="{{root_links.story}}/{{story_item.id}}/" >
+            <div class="story-icon"> 
+               <h3>{{ story_item.title_ar}}</h3>
+            </div>
+          </a>
+         {% endfor %}
+        {% endblock %}
+
+
+        {% block secondary_content_block %} 
+          <div class="novelties"> 
+             <h3>الجديد</h3>   
+             <p>الجديد ١</p>
+             <p>الجديد ١</p>
+             <p>الجديد ١</p>
+             <p>الجديد ١</p>        
+           </div> 
+           <div class="oldies">
+             <h3>القديم</h3>  
+             <p>القديم ٢ </p>
+             <p>القديم ١</p>
+             <p>٣ لقديم ١</p>
+             <p>القديم ٤</p>        
+           </div>    
+        {% endblock %}
+
+   
+ 
