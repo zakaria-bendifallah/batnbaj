@@ -11,17 +11,21 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;*/
- 
-   overflow-y: hidden
+   min-height:100%;
+   height:100%; 
 
 }
 
 body {
+  background:white;
   font-family: 'Changa', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  text-rendering: optimizeLegibility;
-  
+  text-rendering: optimizeLegibility;  
+  margin:0;
+  padding:0;
+  min-height:100%;
+  height:100%; 
 }
 
 body a {
@@ -33,17 +37,24 @@ body a:hover{
  color:#AE0009;
 }
 
+
+.container{
+  min-height:100%;
+  position:relative;
+
+}
+
 div.head-banner{
   background:#FFF;
   background-size:cover;
   width:100%;  
   height:15%;
-  max-height:20%;
+  max-height:15%;
   top:0px;
   marging-left:0px;
   text-transform:uppercase;
   position:fixed;
-  z-index: 9999;
+  z-index: 999;
   box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 20%);  
 }
 
@@ -94,9 +105,11 @@ div.head-menu li{
 }
 
 div.head-menu li:hover{
-  color:#AE0009;
-  background:#88D3E1;
-  
+  border-top:solid #AE0009;
+}
+
+.head-menu a:hover{
+  color:white;   
 }
 
 div.head-submenu{
@@ -112,7 +125,7 @@ div.head-submenu{
 div.head-submenu p{
   text-align: right;
   padding-top:0.5em;
-  padding-right:12%;
+  padding-right:15%;
   /*width:70%;*/
   float:right;
 }
@@ -128,35 +141,106 @@ div.head-submenu input[type=text]{
 }
 
 .core-content{
-  background:#88D3E1;
-  margin-top:7px;
+  background:inherit;
+  position:relative;
   width:100%;
-  /*height:100%;*/
-  min-width:90%;
-  min-height:90%;
-  /*position:relative;*/
+  min-height:100%;
   margin-top:10%;
-  overflow-y:scroll;
+  /*padding-bottom:30%;*/
+  overflow-y:hidden;
 }
 
-div.main-content{
+.main-tab{
   background:white;
-  width:70%;
+  width:60%;
   min-width:40%;
-  height:100%;
-  min-height:20%;
-  /*max-height:50%;*/
+  min-height:100%;
   position:relative;
   float:left;
-  left:20%;
+  left:5%; 
   text-align:right; 
   padding-top:4em;
+  margin-bottom:30%;
+  border-radius:0 0 4% 4%;
+  box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.3);
 }
 
-.main-content h2{ 
+.main-tab h2{ 
   text-align:center;
 
 }
+
+
+.lateral-tab{
+  background:inherit;
+  width:20%;
+  min-height:85%; 
+  position:relative; 
+  padding-top:5%;
+  float:left;
+  display:block;
+  /*padding-left:1%;*/ 
+  left:0;
+  
+}
+
+.novelties {
+  background:white;
+  position:relative;
+  font-size:1.2em;
+  min-width:80%;
+  width: 90%;
+  margin:auto;
+  margin-bottom: 30%;
+  padding-bottom:5%;
+  text-align:right;
+  border-radius:4%;
+  border:solid 1px lightgray;
+  box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+.novelties h3{
+  color: white;
+  background:#055a6b;
+  padding-right:0.5em;
+  padding-top:0;
+  height:5%;
+  width:100%;
+  border-radius:6% 6% 0% 0%;
+  border:solid 1px #055a6b;
+  /*display:block;*/
+}
+
+
+
+.novelties p{
+  padding-right:2%;
+
+}
+ 
+.main-content{
+  position:relative;
+  width:100%;  
+  padding-bottom:80%;
+}
+
+.footer{
+ color:darkgray;
+ width:70%;
+ height:10%; 
+ border-top:solid 1px darkgray;  
+ text-align:center;
+ position:relative;
+ margin:auto;
+}
+
+
+.main-content p,h3{
+
+  padding-right:5%;
+  padding-left:5%;
+}
+
 
 div.story-icon{
  font-size:25px;
@@ -198,79 +282,6 @@ div.story-header{
 }
 
 
-
-.lateral-tab{
-  /*background:rgba(0,0,0,0);*/
-  background:#88D3E1;
-  width:20%;
-  height:100%;
-  /*min-height:100%;*/
-  min-width:20%;
-  position:fixed;
-  
-  padding-top:5%;
-  /*padding-left:1%;*/ 
-  left:0;
-}
-
-.novelties {
-  background:#88D3E1;
-  position:relative;
-  font-size:1.2em;
-  min-width:80%;
-  width: 100%;
-  min-height: 30%;
-  max-height: 50%;
-  /*max-height: 30%;*/
-  text-align:right;
-  border-radius:3%;
-  position:absolute;
-  padding:0.5em 1em;
-  margin-bottom:10em;
-  /*box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.3);*/
-}
-
-.novelties h3{
-  color: white;
-  background:black;
-  padding-right:0.5em;
-  padding-top:0;
-  /*display:block;*/
-}
-
-.novelties p:hover{
-  color: black;
-  padding-right:0.5em;
-  background:#047287;
-}
-
-.oldies {
-  background:#88D3E1 ;
-  position:relative;
-  font-size:1.2em;
-  padding:0.5em 1em;
-  min-width:80%;
-  width: 100%;
-  min-height: 30%;
-  text-align:right;
-  border-radius:3%;
-  border-collapse: collapse;
-  position:absolute;
-  top:55%;
-  /*box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.3);*/
-}
- 
-.oldies h3{
-  color: white;
-  background:black;
-  padding-right:0.5em;
-}
-
-.oldies p:hover{
-  color: black;
-  padding-right:0.5em;
-  background:#047287;
-}
 
 /*------------------ chat styles -------------------*/
 .chat {
@@ -527,12 +538,3 @@ input.textarea {
 
 
 /*--------------------------------------------------*/
-.footer{
- background:#047287;
- color:white;
- align:right;
- text-align:right;
- box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 20%);
- position:relative;
- z-index:5;
-}

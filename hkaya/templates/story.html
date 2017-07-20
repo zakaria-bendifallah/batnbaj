@@ -1,6 +1,7 @@
 ﻿
 {% extends "main_template.html" %}
 
+{% load static %}
     
  
 
@@ -10,7 +11,7 @@
         {% for conversation_item in conversation_list %}
           {%  if conversation_item.character.id == 1  %}
            <li class="other">
-             <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
+             <div class="avatar"><img src={% static "badji_character.png" %} draggable="false"/></div>
              <div class="msg">
                <p>{{conversation_item.text_ar}}</p>
                <time>20:17</time>
@@ -18,7 +19,7 @@
           </li>
           {%  elif conversation_item.character.id == 2  %}
           <li class="self">
-             <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
+             <div class="avatar"><img src={% static "batman_character.png"%} draggable="false"/></div>
              <div class="msg">
                 <p>{{conversation_item.text_ar}}</p>
                 <time>20:18</time>
@@ -38,7 +39,7 @@
              <p>الجديد ١</p>
              <p>الجديد ١</p>        
            </div> 
-           <div class="oldies">
+           <div class="novelties">
              <h3>القديم</h3>  
              <p>القديم ٢ </p>
              <p>القديم ١</p>

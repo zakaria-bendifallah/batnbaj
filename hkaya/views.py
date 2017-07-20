@@ -78,6 +78,9 @@ def viewStory(request, story_id):
 
 def viewChkoun(request):
      
+    root_links = getRootLinks() 
+    categories = getCategories()
+    return render(request, "chkoun.html", locals())
     pass
 
 
