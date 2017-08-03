@@ -5,9 +5,17 @@
   <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
     <link rel="stylesheet" type="text/css" href={% static "pstyle.css" %}>
-    <link href="https://fonts.googleapis.com/css?family=Changa" rel="stylesheet">
-   <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> -->
-    <script type="text/javascript" src="my_js_code.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Changa" rel="stylesheet"> 
+    <!--<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">-->
+
+    <script src="https://use.fontawesome.com/fd5d71e4bc.js"></script>
+
+    <script type="text/javascript" src={% static "js/jquery-3.2.1.min.js" %}></script> 
+    <script type="text/javascript" src={% static "js/my_js_code.js" %}></script>
+    <script>
+     {% block dynamic_js  %}
+     {% endblock %}
+    </script>
     <title>باجي و باتمان</title>
     <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
   </head>
@@ -39,7 +47,7 @@
                <a href="{{root_links.category}}/{{category_item.id}}/">{{category_item.name_ar}}</a>
                << 
              {% endif %}
-               <a href="{{root_links.index}}/">Home</a>
+               <a href="{{root_links.index}}/">الدار</a>
           </p>
       </div>
     </div>

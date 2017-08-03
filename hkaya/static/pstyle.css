@@ -157,12 +157,13 @@ div.head-submenu input[type=text]{
   min-height:100%;
   position:relative;
   float:left;
-  left:5%; 
+  /*left:5%; */
   text-align:right; 
   padding-top:4em;
   margin-bottom:30%;
   border-radius:0 0 4% 4%;
-  box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.3);
+  /*box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.3);*/
+  border:solid 1px lightgray;
 }
 
 .main-tab h2{ 
@@ -171,9 +172,10 @@ div.head-submenu input[type=text]{
 }
 
 
+
 .lateral-tab{
   background:inherit;
-  width:20%;
+  width:25%;
   min-height:85%; 
   position:relative; 
   padding-top:5%;
@@ -192,11 +194,10 @@ div.head-submenu input[type=text]{
   width: 90%;
   margin:auto;
   margin-bottom: 30%;
-  padding-bottom:5%;
   text-align:right;
   border-radius:4%;
   border:solid 1px lightgray;
-  box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.3);
+ /* box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.3);*/
 }
 
 .novelties h3{
@@ -215,7 +216,9 @@ div.head-submenu input[type=text]{
 
 .novelties p{
   padding-right:2%;
-
+  padding-top:3px;
+  padding-bottom:3px;
+  border-bottom:solid 1px lightgray;
 }
  
 .main-content{
@@ -241,36 +244,38 @@ div.head-submenu input[type=text]{
   padding-left:5%;
 }
 
+.main-content h2{
+  margin-bottom:10%;
+}
+
+.main-content h3{
+  border:solid 1px darkred;
+  border-radius: 3px;
+  color: white;
+  background:darkred;
+  text-align:right;
+  display:inline-block;
+  margin-bottom:5%;
+}
+
+/*---- story list display -----------*/
 
 div.story-icon{
  font-size:25px;
  text-align:center;
  position:relative;
- /*left:10%;*/
- /*top:10%;*/
- margin:10%;
- background:#e5e5e5;
  min-width:30%;
- min-height:50%;
- max-width:30%;
- max-height:50%;
+ width:90%;
  border-radius:5px;
- border:1px solid rgba(0,0,0,0.7);
- box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.3);
+ border:1px solid gray;
+ box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.3);
  float:right;
- background: #f2f6f8; /* Old browsers */
- background: -moz-linear-gradient(-45deg, #f2f6f8 0%, #d8e1e7 50%, #b5c6d0 51%, #e0eff9 100%); /* FF3.6-15 */
- background: -webkit-linear-gradient(-45deg, #f2f6f8 0%,#d8e1e7 50%,#b5c6d0 51%,#e0eff9 100%); /* Chrome10-25,Safari5.1-6 */
- background: linear-gradient(135deg, #f2f6f8 0%,#d8e1e7 50%,#b5c6d0 51%,#e0eff9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
- filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', endColorstr='#e0eff9',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+ right:5% 
 }
 
+
 div.story-icon:hover{
-  background: #047287; /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #047287 0%, #047287 50%, #047287 51%, #fb955e 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feccb1', endColorstr='#fb955e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  border:1px solid #AE0009;
 }
 
 div.story-header{
@@ -281,6 +286,109 @@ div.story-header{
   /*position:relative;*/
 }
 
+
+/*------------------ add story styles--------------*/
+#zidhky-form{
+  width:98%;
+  margin:auto;
+}
+
+.zidhky.header{
+  background:white;
+  border:solid 1px darkred; 
+  border-radius:3px;
+  box-shadow: 1px 1px 2px 1px  rgba(0, 0, 0, 0.2), -1px -1px 2px 1px  rgba(0, 0, 0, 0.2);
+  margin-bottom:10%;
+  /*width:95%;*/
+}
+
+.zidhky.header h3{
+  position:relative;
+  display:block;
+  
+}
+
+.zidhky.header div{
+  display:block;
+  padding-bottom:5%;
+}
+.zidhky.header p{
+  display:inline;
+  float:right;
+}
+
+.zidhky.header p,select,input{
+   
+  margin-bottom:3%; 
+}
+
+p#new-response{
+ background:white;
+ color:darkred;
+  font-weight:bold;
+ margin:0;
+ float:right;
+ padding:1px;
+ border:solid 1px darkred;
+ border-radius:4px;
+ display:block;
+}
+
+p#new-response:hover{
+  background:darkred;
+  color:white;
+}
+
+div.zidhky.resp-container{
+  background:white;
+  border:solid 1px gray; 
+  border-radius:3px;
+  box-shadow: 1px 1px 2px 1px  rgba(0, 0, 0, 0.2), -1px -1px 2px 1px  rgba(0, 0, 0, 0.2);
+  margin-bottom:10%;    
+}
+
+div.zidhky.resp-container p{
+  float:left;
+  color:white;
+  padding-left:2px;
+  padding-right:2px;
+}
+
+div.zidhky.resp-container p:hover{
+  font-weight:bold;
+}
+
+div.zidhky .resp-header{
+  background:black;
+  
+  padding-bottom:3%; 
+  margin-bottom:1%; 
+}
+
+div.zidhky.resp-container textarea{
+  margin-right:5%;
+  margin-bottom:5%;
+
+}
+
+
+#zidhky-submit{
+  background:darkred;
+  border:solid 1px darkred;
+  font-weight:bold;
+  border-radius:4px;
+  color:white; 
+  margin:auto; 
+  padding:2px;
+  margin-top:20%;
+  width:30%; 
+  text-align:center;
+}
+
+#zidhky-submit:hover{
+  background:salmon;
+  color:white;
+}
 
 
 /*------------------ chat styles -------------------*/
@@ -298,25 +406,29 @@ div.story-header{
     overflow: hidden;
     display: flex;
 }
+
+
+
 .chat .avatar {
-    width: 40px;
-    height: 40px;
+    width: 10%;
+    height: 10%;
     position: relative;
     display: block;
     z-index: 2;
-    border-radius: 100%;
+   /* border-radius: 100%;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
-    -ms-border-radius: 100%;
+    -ms-border-radius: 100%; */
     background-color: rgba(255,255,255,0.9);
 }
 .chat .avatar img {
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
+    width: 38px;
+    height: 38px;
+    margin:auto;
+ /*   border-radius: 100%;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
-    -ms-border-radius: 100%;
+    -ms-border-radius: 100%; */
     background-color: rgba(255,255,255,0.9);
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -343,7 +455,10 @@ div.story-header{
 
 .other .msg {
     order: 1;
+    background:#584848;
+    color: white;
     border-top-left-radius: 0px;
+    border-radius:4%;
     box-shadow: -1px 2px 0px #D4D4D4;
 }
 .other:before {
@@ -365,7 +480,9 @@ div.story-header{
 }
 .self .msg {
     order: 1;
+    background:#DFDFDF;
     border-bottom-right-radius: 0px;
+    border-radius:4%;
     box-shadow: 1px 2px 0px #D4D4D4;
 }
 .self .avatar {
@@ -392,11 +509,19 @@ div.story-header{
     border-radius: 2px;
     box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.07);
 }
-.msg p {
-    font-size: 0.8rem;
+ .msg p {
+    font-size: 1rem;
     margin: 0 0 0.2rem 0;
-    color: #777;
 }
+
+.other .msg p{
+    color: white;
+}
+
+.self .msg p{
+    color: black;
+}
+
 .msg img {
     position: relative;
     display: block;

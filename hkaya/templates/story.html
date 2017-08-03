@@ -6,24 +6,24 @@
  
 
       {% block main_content_block %}
-       <h2> {{story_instance.title_ar}}  </h2>
+       <h3> {{story_item.title_ar}}  </h3>
        <ol class="chat">
         {% for conversation_item in conversation_list %}
-          {%  if conversation_item.character.id == 1  %}
+          {%  if conversation_item.character.id == 2  %}
            <li class="other">
-             <div class="avatar"><img src={% static "badji_character.png" %} draggable="false"/></div>
+             <div class="avatar"><img src={% static "batman_avatar.jpg" %} draggable="false"/></div>
              <div class="msg">
                <p>{{conversation_item.text_ar}}</p>
                <time>20:17</time>
             </div>
           </li>
-          {%  elif conversation_item.character.id == 2  %}
+          {%  elif conversation_item.character.id == 1  %}
           <li class="self">
-             <div class="avatar"><img src={% static "batman_character.png"%} draggable="false"/></div>
+             <div class="avatar"><img src={% static "batman_avatar.jpg"%} draggable="false"/></div>
              <div class="msg">
                 <p>{{conversation_item.text_ar}}</p>
                 <time>20:18</time>
-             </div>
+             </div> 
            </li>
           {% endif %}
         {% endfor %}

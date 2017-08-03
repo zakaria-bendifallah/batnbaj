@@ -1,0 +1,61 @@
+﻿
+{% extends "main_template.html" %}
+
+{% load static %}
+     
+    
+        {% block dynamic_js %}
+          var character_list = [ 
+              {id:{{characters.0.id}},name:"{{characters.0.name_ar}}"}, 
+              {id:{{characters.1.id}},name:"{{characters.1.name_ar}}"}  
+          ];
+          
+        {% endblock %}
+ 
+
+        {% block main_content_block %}
+            <h3>زيد حكاية</h3>
+            <form id="zidhky-form">
+                  {% csrf_token %}
+               <div class="zidhky header">
+                  <h3>عرف الحكاية</h3> 
+                  <div>
+                    <p>الإسم </p>
+                    <input type="text" name="story_name" class="zidhky story_name"><br>        
+                 
+                    <p>الفئة</p>
+                    <select name="category-select" class="zidhky category_name" >
+                      {% for category in categories %}
+                        <option value="{{category.id}}">{{category.name_ar}}</option>
+                      {% endfor %} 
+                    </select><br>
+
+                    <p> مسودة   </p> 
+                      <input type="checkbox" name="draft"  checked class="zidhky draft"> 
+                  </div>
+               </div>  <!-- zidhky header -->
+               <p id="new-response">زيد جواب <i class="fa fa-plus" aria-hidden="true"></i></p>
+                <p id="zidhky-submit" >أبعث</p>
+            </form>
+
+        {% endblock %}
+      
+
+        {% block secondary_content_block %} 
+          <div class="novelties"> 
+             <h3>الجديد &nbsp<i class="fa fa-chevron-circle-left"></i></h3>   
+             <p><a href="">الجديد ١</a></p>
+             <p><a href="">الجديد ١</a></p>
+             <p><a href="">الجديد ١</a></p>
+             <p><a href="">الجديد ١</a></p>        
+           </div> 
+           <div class="novelties">
+             <h3>القديم &nbsp<i class="fa fa-chevron-circle-left"></i> </h3>  
+             <p><a href="">الجديد ١</a></p>
+             <p><a href="">الجديد ١</a></p>
+             <p><a href="">الجديد ١</a></p>
+             <p><a href="">الجديد ١</a></p>        
+           </div>      
+        {% endblock %}
+      
+
