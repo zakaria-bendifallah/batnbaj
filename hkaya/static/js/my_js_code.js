@@ -3,8 +3,8 @@
 $(document).ready(function() {
 
    //add a new response window
-   $("#new-response").click(function(){
-
+   $("#new-response").click(function(e){
+     e.preventDefault();
      var new_elem = {
          id          : form_data.number_responses,
          div_id      : "zidhky_div_" + form_data.number_responses,
@@ -61,9 +61,8 @@ $(document).ready(function() {
                      character_tag).append(
                      textarea_tag);
 
-     $("p#new-response").before(main_div);
+     $("#new-response").before(main_div);
      main_div.hide().fadeIn("slow");
-     //alert("added: ") ;
    });
 
 
@@ -102,18 +101,18 @@ $(document).ready(function() {
       self_parent = $(this).parent().parent();
       next_parent = self_parent.next();
       if(next_parent.hasClass("zidhky resp-container")){
-        self_parent.slideUp("fast");
-        self_parent.delay(100).detach(); 
-        next_parent.after(self_parent);
-        self_parent.delay(100).slideDown();
+          self_parent.slideUp("fast");
+          self_parent.delay(100).detach(); 
+          next_parent.after(self_parent);
+          self_parent.delay(100).slideDown();
 
-        var self_div_id = self_parent.attr("id"); 
-        var next_div_id = next_parent.attr("id"); 
-        var self_index = form_data.get_index_by_div(self_div_id);
-        var next_index = form_data.get_index_by_div(next_div_id);  
-        var self_response = form_data.responses_array[self_index];
-        form_data.responses_array[self_index] = form_data.responses_array[next_index] 
-        form_data.responses_array[next_index] = self_response;
+          var self_div_id = self_parent.attr("id"); 
+          var next_div_id = next_parent.attr("id"); 
+          var self_index = form_data.get_index_by_div(self_div_id);
+          var next_index = form_data.get_index_by_div(next_div_id);  
+          var self_response = form_data.responses_array[self_index];
+          form_data.responses_array[self_index] = form_data.responses_array[next_index] 
+          form_data.responses_array[next_index] = self_response;
       }
    }));
     
@@ -139,7 +138,8 @@ $(document).ready(function() {
    }));
 
 
-   $("#zidhky-submit").click(function(){
+   $("#data-submit").click(function(e){
+         e.preventDefault();
          console.log($(".zidhky.story_name").val());
          console.log($(".zidhky.category_name").val());
          console.log($(".zidhky.draft").is(":checked"));
@@ -148,33 +148,41 @@ $(document).ready(function() {
 
          for(i=0; i < darray_length; i++)
          {
-            console.log(form_data.responses_array[i].textarea_id);
-            console.log(form_data.responses_array[i].character_id);
-
+             console.log($('#'+form_data.responses_array[i].textarea_id).val());
+             console.log($('#'+form_data.responses_array[i].character_id).val());
          }
 
          var post_data = {
-              story_name : $(".zidhky.story_name").val(),
-              category_name : $(".zidhky.category_name").val(),
+              title_ar : $(".zidhky.story_name").val(),
+              category : $(".zidhky.category_name").val(),
               draft : $(".zidhky.draft").is(":checked"),
+              synopsis_ar : $(".zidhky.synopsis").val(),
               responses : [],
               characters : []  
          }
          for(i=0; i < darray_length; i++)
          {
-            post_data.responses.push(form_data.responses_array[i].textarea_id);
-            post_data.characters.push(form_data.responses_array[i].character_id);
+            post_data.responses.push(
+                          $('#'+form_data.responses_array[i].textarea_id).val());
+            post_data.characters.push(
+                          $('#'+form_data.responses_array[i].character_id).val());
          }
-                    
+         
+         var json_post_data = JSON.stringify(post_data);
+         console.log(json_post_data); 
 
          $.ajax({url: "/hkaya/zidhky/ajax/validate_story/",
-                data: post_data,  
+                headers: {'X-CSRFToken': csrf_token},
+                data: json_post_data,  
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
                 type: 'POST', 
-                success: function(data){      
-                    alert("request succeeded !");
-                    console.log(data);
+                success: function(data){     
+                    if(data.status == "success"){
+                       add_story_success(data);
+                    }else{
+                       add_story_failure(data);
+                    }
                 },
                 error: function(xhr){
                     alert("An error occured: " + xhr.status + " " + xhr.statusText); 
@@ -188,28 +196,53 @@ $(document).ready(function() {
 });
 
 
-   var form_data = {
-      number_responses : 0,
-      responses_array : [], 
-      /* object elements have the following structure
-          {
-            id : ,
-            div_id : "",
-            textarea_id : "",
-            character_id : ""
-          }
-      */
-      get_index_by_div : function(id){
+var form_data = {
+    number_responses : 0,
+    responses_array : [], 
+    /* object elements have the following structure
+        {
+          id : ,
+          div_id : "",
+          textarea_id : "",
+          character_id : ""
+        }
+    */
+    get_index_by_div : function(id){
 
-          var length = form_data.responses_array.length;
-          var index = -1;
-          for(i=0; i< length; i++)
-          {
-              if(id == form_data.responses_array[i].div_id){
-                  index = i;
-              }     
+        var length = form_data.responses_array.length;
+        var index = -1;
+        for(i=0; i< length; i++)
+        {
+            if(id == form_data.responses_array[i].div_id){
+                index = i;
+            }     
 
-          }
-          return index;
-      }
-   };
+        }
+        return index;
+    }
+};
+
+
+
+function add_story_success(data)
+{
+
+    $("#zidhky-form").hide();
+    var success_msg_tag = $("<p> "+ data.message +" &nbsp</p>");
+    success_msg_tag.addClass("success_msg");
+    var check_font_tag = $('<i class="fa fa-check " aria-hidden="true"></i>');
+    success_msg_tag.append(check_font_tag);
+    var new_story_link = $("<a href='" + add_story_link + "'>زيد حكاية أخرى</a>");     
+    new_story_link.attr("id","link-button");
+    $("#zidhky-form").before(success_msg_tag).before(new_story_link);
+}
+
+function add_story_failure(data)
+{
+
+
+
+}
+
+
+

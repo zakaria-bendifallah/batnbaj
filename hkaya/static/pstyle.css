@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Changa');
+
 * {
  margin:0;
  padding:0;
  box-sizing:border-box;
+ font-family: 'Changa', sans-serif;
  /*border:1px solid black;*/
 }
 
@@ -13,12 +16,12 @@ html {
   background-size: cover;*/
    min-height:100%;
    height:100%; 
-
 }
+
+
 
 body {
   background:white;
-  font-family: 'Changa', sans-serif;
   font-size: 16px;
   font-weight: 400;
   text-rendering: optimizeLegibility;  
@@ -270,7 +273,8 @@ div.story-icon{
  border:1px solid gray;
  box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.3);
  float:right;
- right:5% 
+ right:5%;
+ margin-bottom:5%; 
 }
 
 
@@ -322,22 +326,7 @@ div.story-header{
   margin-bottom:3%; 
 }
 
-p#new-response{
- background:white;
- color:darkred;
-  font-weight:bold;
- margin:0;
- float:right;
- padding:1px;
- border:solid 1px darkred;
- border-radius:4px;
- display:block;
-}
 
-p#new-response:hover{
-  background:darkred;
-  color:white;
-}
 
 div.zidhky.resp-container{
   background:white;
@@ -372,7 +361,27 @@ div.zidhky.resp-container textarea{
 }
 
 
-#zidhky-submit{
+
+/*------- site buttons styles ----------------*/
+
+#new-response{
+ background:white;
+ color:darkred;
+  font-weight:bold;
+ margin:0;
+ float:right;
+ padding:1px;
+ border:solid 1px darkred;
+ border-radius:4px;
+ display:block;
+}
+
+#new-response:hover{
+  background:darkred;
+  color:white;
+}
+
+#data-submit{
   background:darkred;
   border:solid 1px darkred;
   font-weight:bold;
@@ -383,11 +392,46 @@ div.zidhky.resp-container textarea{
   margin-top:20%;
   width:30%; 
   text-align:center;
+  display:block;
 }
 
-#zidhky-submit:hover{
+#data-submit:hover{
   background:salmon;
   color:white;
+}
+
+#link-button{
+  background:#047287;
+  border:solid 1px #047287;
+  font-weight:bold;
+  border-radius:4px;
+  color:white; 
+  margin:auto; 
+  padding:2px;
+  margin-top:20%;
+  width:30%; 
+  text-align:center;
+  display:block;
+}
+
+#link-button:hover{
+  background:#1890A6;
+  color:white;
+}
+
+
+
+/*------------------ special messages -------------*/
+
+.success_msg{
+  background:#d0e8ed; 
+  color:#093942;
+  font-size:1em;
+  border:solid 1px #093942;
+  border-radius:4px;
+  width:80%;
+  margin:auto;
+  margin-top:10%
 }
 
 

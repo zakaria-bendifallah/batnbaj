@@ -7,6 +7,6 @@ urlpatterns = [
     url(r'^chkoun/', views.viewChkoun, name='index'),
     url(r'^hky/(\d+)/',  views.viewStory , name='hky'),
     url(r'^cat/(\d+)/',  views.viewCategory , name='cat'),
-    url(r'^zidhky/',  views.viewAddStory , name='addstory'),
+    url(r'^zidhky/add_story/',  views.viewAddStory , name='addstory'),
     url(r'^zidhky/ajax/validate_story/',  views.ajaxValidateStory , name='validatestory'),
 ]

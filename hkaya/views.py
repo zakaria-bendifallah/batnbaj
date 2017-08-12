@@ -3,7 +3,7 @@ from hkaya.utils import *
 from django.http import HttpResponse,JsonResponse
 from hkaya.models import Category, Story, Response, Character   
 from django.views.decorators.csrf import ensure_csrf_cookie,csrf_exempt
-
+import json
 # Create your views here.
 
 
@@ -39,10 +39,8 @@ def viewChkoun(request):
     root_links = getRootLinks() 
     categories = getCategories()
     return render(request, "chkoun.html", locals())
-    pass
 
 
-@csrf_exempt
 def viewAddStory(request):
 
     root_links = getRootLinks() 
@@ -56,11 +54,22 @@ def viewAddStory(request):
 
 # -- AJAX views ----------------------------
 
-@csrf_exempt
 def ajaxValidateStory(request):
-    
-    json_data = { 'status' : "success"};  
-    return JsonResponse(json_data);
+    if request.is_ajax() and request.method == 'POST':
+
+        decoded_request_body = request.body.decode('UTF-8')
+        json_form = json.loads(decoded_request_body) 
+        print(json_form['title_ar'],json_form['category'],json_form['draft']) 
+
+        if json_form['draft'] == 'true':
+            json_form['draft'] = True
+        else:
+            json_form['draft'] = False
+
+        Story.add_entry(json_form)
+
+    json_data = { 'status' : "success", 'message': "حكايتك تسجلت فالمذكرة يا السي"} 
+    return JsonResponse(json_data)
 
 
 

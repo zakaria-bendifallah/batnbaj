@@ -5,7 +5,7 @@
   <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
     <link rel="stylesheet" type="text/css" href={% static "pstyle.css" %}>
-    <link href="https://fonts.googleapis.com/css?family=Changa" rel="stylesheet"> 
+    <!--<link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet"> -->
     <!--<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">-->
 
     <script src="https://use.fontawesome.com/fd5d71e4bc.js"></script>
@@ -33,6 +33,7 @@
           <li><a href="{{root_links.category}}/{{categories.2.id}}/">{{categories.2.name_ar}}</a></li>
           <li><a href="{{root_links.category}}/{{categories.1.id}}/">{{categories.1.name_ar}}</a></li>
           <li><a href="{{root_links.category}}/{{categories.0.id}}/">{{categories.0.name_ar}}</a></li>
+          <li><a href="{{root_links.index}}/">الدار <i class="fa fa-home"></i></a></li>
         </ul>
       </div> 
 
@@ -54,9 +55,20 @@
 
     <div class="core-content">
         <div class="lateral-tab">
-          {% block secondary_content_block  %}
-            usually contains links to new and old stories  
-          {% endblock %}
+          <div class="novelties"> 
+             <h3>الجديد &nbsp<i class="fa fa-chevron-circle-left"></i></h3>   
+             <p><a href="">الجديد ١</a></p>
+             <p><a href="">الجديد ١</a></p>
+             <p><a href="">الجديد ١</a></p>
+             <p><a href="">الجديد ١</a></p>        
+           </div> 
+           <div class="novelties">
+             <h3>القديم &nbsp<i class="fa fa-chevron-circle-left"></i> </h3>  
+             <p><a href="">الجديد ١</a></p>
+             <p><a href="">الجديد ١</a></p>
+             <p><a href="">الجديد ١</a></p>
+             <p><a href="">الجديد ١</a></p>        
+           </div>      
         </div> 
         <div class="main-tab">
           <div class="main-content"> 

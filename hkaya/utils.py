@@ -9,7 +9,9 @@ def getRootLinks():
       'index': "http://localhost:8000/hkaya/index",
       'chkoun': "http://localhost:8000/hkaya/chkoun",
       'category' : "http://localhost:8000/hkaya/cat", 
-      'story' : "http://localhost:8000/hkaya/hky"} 
+      'story' : "http://localhost:8000/hkaya/hky",
+      'add_story' : "http://localhost:8000/hkaya/zidhky"
+      } 
    return root_links
 
 
