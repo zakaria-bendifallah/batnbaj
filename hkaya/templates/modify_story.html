@@ -4,16 +4,19 @@
 {% load static %}
          
 {% block dynamic_js %}
-
+/* loading the list of characters for character select tag */
 var character_list = [ 
-    {id:{{characters.0.id}},name:"{{characters.0.name_ar}}"}, 
-    {id:{{characters.1.id}},name:"{{characters.1.name_ar}}"}  
+    {% for character in characters %}
+      {id:{{character.id}}, name:"{{character.name_ar}}"}, 
+    {% endfor %}
 ];
-         
+var m_story_id = {{story_item.id}};          
 var csrf_token = '{{csrf_token}}';
-var add_story_link = '{{root_links.add_story}}/add_story/'; 
+var search_story_link = '{{root_links.add_story}}/search_story/'; 
            
 $(document).ready(function() {
+
+   prepopulate_responses(); 
 
    //add a new response window
    $("#new-response").click(function(e){
@@ -48,9 +51,6 @@ $(document).ready(function() {
      up_tag.addClass("fa fa-arrow-circle-up");
 
      var newline_tag = $('<br>');
-
-   
-
      var character_tag = $('<select></select>')
      character_tag.attr("name","character-select");
      character_tag.attr("id",new_elem.character_id);
@@ -159,6 +159,7 @@ $(document).ready(function() {
          var darray_length = form_data.responses_array.length;
 
          var post_data = {
+              story_id : m_story_id,
               title_ar : $(".zidhky.story_name").val(),
               category : $(".zidhky.category_name").val(),
               draft : $(".zidhky.draft").is(":checked"),
@@ -185,9 +186,9 @@ $(document).ready(function() {
                 type: 'POST', 
                 success: function(data){     
                     if(data.status == "success"){
-                       add_story_success(data);
+                       update_story_success(data);
                     }else{
-                       add_story_failure(data);
+                       update_story_failure(data);
                     }
                 },
                 error: function(xhr){
@@ -230,7 +231,7 @@ var form_data = {
 
 
 
-function add_story_success(data)
+function update_story_success(data)
 {
 
     $("#zidhky-form").hide();
@@ -238,12 +239,12 @@ function add_story_success(data)
     success_msg_tag.addClass("success_msg");
     var check_font_tag = $('<i class="fa fa-check " aria-hidden="true"></i>');
     success_msg_tag.append(check_font_tag);
-    var new_story_link = $("<a href='" + add_story_link + "'>زيد حكاية أخرى</a>");     
+    var new_story_link = $("<a href='" + search_story_link + "'>عدل حكاية أخرى</a>");     
     new_story_link.attr("id","link-button");
     $("#zidhky-form").before(success_msg_tag).before(new_story_link);
 }
 
-function add_story_failure(data)
+function update_story_failure(data)
 {
 
     var msg_tag = $("<p> "+ data.message +" &nbsp</p>");
@@ -255,31 +256,106 @@ function add_story_failure(data)
 
 }
 
+
+function prepopulate_responses(){
+     
+     var responses_recorded = [
+         {% for conversation_item in conversation_list %}
+           "{{conversation_item.text_ar}}",  
+         {% endfor %}
+     ];
+     var characters_recorded = [
+         {% for conversation_item in conversation_list %}
+           {{conversation_item.character.id}}, 
+         {% endfor %}
+     ];
+
+     for(i=0; i<responses_recorded.length; i++)
+     {
+         var new_elem = {
+             id          : form_data.number_responses,
+             div_id      : "zidhky_div_" + form_data.number_responses,
+             textarea_id: "zidhky_textarea_" + form_data.number_responses,
+             character_id: "zidhky_character_" + form_data.number_responses
+         };
+         form_data.responses_array.push(new_elem);
+         form_data.number_responses += 1;
+         var main_div = $('<div></div>');
+         main_div.addClass("zidhky resp-container");
+         main_div.attr("id",new_elem.div_id);
+
+         var header_div = $("<div></div>")
+         header_div.addClass("zidhky resp-header");
+
+         var close_tag = $('<p></p>');
+         close_tag.addClass("fa fa-window-close");
+
+         var minus_tag = $('<p></p>');
+         minus_tag.addClass("fa fa-minus-square");
+
+         var down_tag = $('<p></p>');
+         down_tag.addClass("fa fa-arrow-circle-down");
+
+         var up_tag = $('<p></p>');
+         up_tag.addClass("fa fa-arrow-circle-up");
+
+         var newline_tag = $('<br>');
+         var character_tag = $('<select></select>')
+         character_tag.attr("name","character-select");
+         character_tag.attr("id",new_elem.character_id);
+         for (character in character_list){
+            var option_tag = $('<option></option>');
+            option_tag.attr("value",character_list[character].id);
+            option_tag.text(character_list[character].name);
+            if (character_list[character].id == characters_recorded[i])
+            {
+               option_tag.attr("selected",true);
+            }
+            character_tag.append(option_tag); 
+        } 
+      
+        var textarea_tag = $('<textarea></textarea>');
+        textarea_tag.attr("rows","5");
+        textarea_tag.attr("cols","50");
+        textarea_tag.attr("id", new_elem.textarea_id);
+        textarea_tag.val(responses_recorded[i]);
+        header_div.append(close_tag).append(
+                     minus_tag).append(
+                     down_tag).append(
+                     up_tag);
+        main_div.append(header_div).append(
+                     character_tag).append(
+                     textarea_tag);
+
+        $("#new-response").before(main_div);
+        main_div.hide().fadeIn("slow");
+     }
+}
 {% endblock %}
  
 
 {% block main_content_block %}
-    <h3>زيد حكاية</h3>
+    <h3>عدل حكاية</h3>
     <form id="zidhky-form">
        <div class="zidhky header">
 	  <h3>عرف الحكاية</h3> 
 	  <div>
 	    <p>الإسم </p>
-	    <input type="text" name="story_name" class="zidhky story_name"><br>        
+	    <input type="text" name="story_name" class="zidhky story_name" value="{{story_item.title_ar}}"><br>        
 	 
 	    <p>الفئة</p>
 	    <select name="category-select" class="zidhky category_name" >
 	      {% for category in categories %}
-		<option value="{{category.id}}">{{category.name_ar}}</option>
+		<option value="{{category.id}}" {% if category.id == story_item.category.id %} selected {% endif %} >{{category.name_ar}}</option>
 	      {% endfor %} 
 	    </select><br>
 
 	    <p> مسودة </p> 
-	      <input type="checkbox" name="draft"  checked class="zidhky draft">
+	      <input type="checkbox" name="draft"  {% if story_item.draft %} checked {% endif %} class="zidhky draft">
 	    <br><br> 
 
-	    <p>ملخص   </p>
-	      <textarea rows=5 cols=50 class="zidhky synopsis"> </textarea>  
+	    <p>ملخص </p>
+	      <textarea rows=5 cols=50 class="zidhky synopsis">{{story_item.synopsis_ar}}</textarea>  
 	  </div>
        </div>  <!-- zidhky header -->
        <a id="new-response" href="">زيد جواب <i class="fa fa-plus" aria-hidden="true"></i></a>

@@ -10,8 +10,10 @@ def getRootLinks():
       'chkoun': "http://localhost:8000/hkaya/chkoun",
       'category' : "http://localhost:8000/hkaya/cat", 
       'story' : "http://localhost:8000/hkaya/hky",
-      'add_story' : "http://localhost:8000/hkaya/zidhky"
-      } 
+      'add_story' : "http://localhost:8000/hkaya/zidhky/add_story",
+      'search_story' : "http://localhost:8000/hkaya/zidhky/search_story",
+      'modify_story' : "http://localhost:8000/hkaya/zidhky/modify_story",
+   } 
    return root_links
 
 
@@ -26,21 +28,28 @@ def getCategory(category_id):
    return queryset
 
 
-def getStories(category_id = None , draft = False ):
-   if category_id is None:
-       queryset = Story.objects.all()
-   else:
+def getStories(q_story_title = None, q_category = None , q_draft = False ):
+   
+   queryset = Story.objects.all()
+   if q_category is not None: 
        queryset = Story.objects.all().filter(
-                            category = category_id
+                            category = q_category
                           )
-   queryset = queryset.filter(draft = 0)[:10]
+   if q_story_title is not None:
+       queryset = queryset.filter(title_ar = q_story_title)
+
+   if not q_draft: 
+       q_draft = 0
+   else:
+       q_draft = 1
+
+   queryset = queryset.filter(draft = q_draft)[:10]
    return list(queryset)
 
 
 def getStory(story_id):
    queryset = Story.objects.get(pk = story_id)
    return queryset 
-
 
 
 def getCharacters():

@@ -21,7 +21,7 @@ def viewCategory(request, category_id):
 
     root_links = getRootLinks() 
     categories = getCategories()
-    story_list = getStories(category_id)
+    story_list = getStories(q_category = category_id)
     category_item = getCategory(category_id)
     return render(request, "category.html", locals())
 
@@ -49,8 +49,44 @@ def viewAddStory(request):
 
     return render(request, "add_story.html", locals())
 
+def viewSearchStory(request):
+
+    root_links = getRootLinks() 
+    categories = getCategories()
+    characters = getCharacters()
+
+    search_request = False
+    story_list = {}  
+    if request.method == 'POST':
+         search_request = True
+         story_name = request.POST.get("story_name")
+         category    = request.POST.get("category-select")
+         draft       = request.POST.get("draft") 
+         if story_name == "":
+             story_name = None
+         if category == "-1":
+             category = None
+         if draft is not None: 
+             draft = 1
+         else:
+             draft = 0
+         story_list = getStories(q_story_title = story_name,
+                                  q_category    = category,
+                                  q_draft       = draft)  
+    found_stories = len(story_list)
+    return render(request, "search_story.html", locals())
            
-   
+
+def viewModifyStory(request, story_id):
+        
+    root_links = getRootLinks() 
+    categories = getCategories()
+    characters = getCharacters()
+    story_item = getStory(story_id)
+    #category_item = getCategory(story_item.category) 
+    conversation_list = getConversation(story_id) 
+    
+    return render(request, "modify_story.html", locals())
 
 # -- AJAX views ----------------------------
 
@@ -59,19 +95,30 @@ def ajaxValidateStory(request):
 
         decoded_request_body = request.body.decode('UTF-8')
         json_form = json.loads(decoded_request_body) 
-        print(json_form['title_ar'],json_form['category'],json_form['draft']) 
 
-        if json_form['draft'] == 'true':
-            json_form['draft'] = True
+        if json_form['draft']:
+            json_form['draft'] = 1
         else:
-            json_form['draft'] = False
+            json_form['draft'] = 0
+        if 'story_id' in json_form: # update a story
+            json_data = Story.update_entry(json_form)
+        else: # add new story 
+            json_data = Story.add_entry(json_form)
 
-        Story.add_entry(json_form)
-
-    json_data = { 'status' : "success", 'message': "حكايتك تسجلت فالمذكرة يا السي"} 
     return JsonResponse(json_data)
 
+def ajaxDeleteStory(request):
 
+    json_data = { 'status' : "failure"}
+    if request.is_ajax() and request.method == 'POST':
+        decoded_request = request.body.decode('UTF-8')
+        json_form = json.loads(decoded_request)
+        story_deleted = Story.delete_entry(json_form['story_id'][2:])
+        json_data["story_id"] = json_form['story_id']  
+        if story_deleted:
+            json_data['status'] = "success"
+         
+    return JsonResponse(json_data)
 
 
 

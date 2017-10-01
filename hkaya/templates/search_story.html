@@ -1,0 +1,114 @@
+﻿
+{% extends "main_template.html" %}
+
+{% load static %}
+     
+    
+{% block dynamic_js %}
+  var character_list = [ 
+      {id:{{characters.0.id}},name:"{{characters.0.name_ar}}"}, 
+      {id:{{characters.1.id}},name:"{{characters.1.name_ar}}"}  
+  ];
+ 
+  var csrf_token = '{{csrf_token}}';
+  var search_story_link = '{{root_links.search_story}}/search_story/'; 
+
+$(document).ready(function() {
+  $(".delete-story").click(function(e){
+          e.preventDefault();
+          var post_data = {
+                story_id : $(this).attr("id"),
+          }
+          var json_post_data = JSON.stringify(post_data);
+          /*console.log(json_post_data);*/
+          $.ajax({url: "/hkaya/zidhky/ajax/delete_story/",
+                headers: {'X-CSRFToken': csrf_token},
+                data: json_post_data,  
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                type: 'POST', 
+                success: function(data){     
+                    if(data.status == "success"){
+                       delete_story_success(data);
+                    }else{
+                       delete_story_failure(data);
+                    }
+                },
+                error: function(xhr){
+                    alert("An error occured: " + xhr.status + " " + xhr.statusText); 
+                },
+          });    /* $.ajax() */
+    });    /* $(".delete-stor").onclick() */
+});  /* document.ready() */
+
+function delete_story_success(data)
+{
+    var story_icon = $("#"+data.story_id).parent().parent();
+    var msg_tag = $("<p> الحكاية تمحات </p>");
+    msg_tag.addClass("success_msg");
+    var check_font_tag = $('<i class="fa fa-check " aria-hidden="true"></i>');
+    msg_tag.append(check_font_tag);
+    story_icon.after(msg_tag);
+    story_icon.fadeOut("slow");
+    $(".success_msg").delay(2000).fadeOut("slow"); 
+}
+
+function delete_story_failure(data)
+{
+    var story_icon = $("#"+data.story_id).parent().parent();
+    var msg_tag = $("<p> ما قدرناش نمحيو لحكاية </p>");
+    msg_tag.addClass("failure_msg");
+    var check_font_tag = $('<i class="fa fa-times " aria-hidden="true"></i>');
+    msg_tag.append(check_font_tag);
+    story_icon.after(msg_tag);
+    story_icon.fadeOut("slow");
+    $(".failure_msg").delay(2000).fadeOut("slow"); 
+} 
+
+{% endblock %}
+
+
+{% block main_content_block %}
+    <h3>حوس حكاية</h3>
+    <form id="zidhky-form" method='post'>
+       <div class="zidhky header">
+	  <h3>معلومات</h3> 
+	  <div>
+              {% csrf_token %}
+	      <p>الإسم </p>
+	      <input type="text" name="story_name" class="zidhky story_name"><br>        
+	 
+	      <p>الفئة</p>
+	      <select name="category-select" class="zidhky category_name" >
+	         {% for category in categories %}
+		    <option value="{{category.id}}">{{category.name_ar}}</option>
+	         {% endfor %}
+                 <option value="-1">كلها</option> 
+	      </select><br>
+
+	      <p> مسودة </p> 
+	      <input type="checkbox" name="draft"  checked class="zidhky draft">  
+	      <input id="data-submit" type="submit" value="حوس">
+	   </div>
+       </div>  <!-- zidhky header -->
+    </form>  <!-- id:zidhky-form -->
+
+    {% if search_request %}
+         <p class="num_search_results">لقينا {{found_stories}} حكاية </p>
+         {%  for story_item in story_list %}
+            <a href="{{root_links.story}}/{{story_item.id}}/" >
+                <div class="story-icon"> 
+                    <h3>{{ story_item.title_ar}}</h3>
+                    <div class="story-edit">
+                       <a href="{{root_links.modify_story}}/{{story_item.id}}">تغيير</a> | <a href="" class="delete-story" id="s_{{story_item.id}}">محي</a>
+                    </div>
+                </div>
+            </a>
+         {% endfor %}
+
+    {% endif %}
+
+{% endblock %}
+
+
+

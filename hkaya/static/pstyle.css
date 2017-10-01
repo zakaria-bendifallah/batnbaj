@@ -51,8 +51,8 @@ div.head-banner{
   background:#FFF;
   background-size:cover;
   width:100%;  
-  height:15%;
-  max-height:15%;
+  height:20%;
+  max-height:20%;
   top:0px;
   marging-left:0px;
   text-transform:uppercase;
@@ -185,8 +185,7 @@ div.head-submenu input[type=text]{
   float:left;
   display:block;
   /*padding-left:1%;*/ 
-  left:0;
-  
+  left:0; 
 }
 
 .novelties {
@@ -208,7 +207,7 @@ div.head-submenu input[type=text]{
   background:#055a6b;
   padding-right:0.5em;
   padding-top:0;
-  height:5%;
+  height:2em;
   width:100%;
   border-radius:6% 6% 0% 0%;
   border:solid 1px #055a6b;
@@ -261,11 +260,62 @@ div.head-submenu input[type=text]{
   margin-bottom:5%;
 }
 
-/*---- story list display -----------*/
+/*---- admin panel ------------------*/
+
+.admin-tab{
+  background:inherit;
+  width:15%;
+  min-height:85%; 
+  position:relative; 
+  padding-top:5%;
+  float:left;
+  display:block;
+  /*padding-left:1%;*/ 
+  left:0; 
+}
+
+.admin-panel {
+  background:white;
+  position:relative;
+  font-size:1.2em;
+  min-width:80%;
+  width: 90%;
+  margin:auto;
+  margin-bottom: 30%;
+  text-align:right;
+  border-radius:4%;
+  border:solid 1px lightgray;
+ /* box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.3);*/
+}
+
+.admin-panel h3{
+  color: white;
+  background:darkred;
+  padding-right:0.5em;
+  padding-top:0;
+  height:2em;
+  width:100%;
+  border-radius:6% 6% 0% 0%;
+  border:solid 1px #055a6b;
+  /*display:block;*/
+}
+
+
+
+.admin-panel p{
+  padding-right:2%;
+  padding-top:3px;
+  padding-bottom:3px;
+  border-bottom:solid 1px lightgray;
+}
+ 
+
+
+/*---------------- story list display -----------*/
 
 div.story-icon{
  font-size:25px;
- text-align:center;
+ text-align:right;
  position:relative;
  min-width:30%;
  width:90%;
@@ -274,7 +324,7 @@ div.story-icon{
  box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.3);
  float:right;
  right:5%;
- margin-bottom:5%; 
+ margin-bottom:5%;
 }
 
 
@@ -282,18 +332,21 @@ div.story-icon:hover{
   border:1px solid #AE0009;
 }
 
-div.story-header{
-  color:#FFF;
-  background-color:#000;
-  border-top-right-radius:5px;
-  border-top-left-radius:5px;
-  /*position:relative;*/
+.story-edit{
+  margin-right:5%;
 }
-
+.story-edit a{
+  font-size:0.8em;
+  /*float:right;*/
+  text-align:right;
+}
+.story-edit a:hover{
+  font-weight:bold; 
+}
 
 /*------------------ add story styles--------------*/
 #zidhky-form{
-  width:98%;
+  width:90%;
   margin:auto;
 }
 
@@ -325,8 +378,6 @@ div.story-header{
    
   margin-bottom:3%; 
 }
-
-
 
 div.zidhky.resp-container{
   background:white;
@@ -360,6 +411,12 @@ div.zidhky.resp-container textarea{
 
 }
 
+/*--------------- search story styles -------------------*/
+.num_search_results {
+  border-bottom:solid darkred;
+  color: darkred;
+  margin-bottom:2em;
+}
 
 
 /*------- site buttons styles ----------------*/
@@ -429,11 +486,23 @@ div.zidhky.resp-container textarea{
   font-size:1em;
   border:solid 1px #093942;
   border-radius:4px;
-  width:80%;
-  margin:auto;
-  margin-top:10%
+  width:90%;
+  float:right;
+  margin-right:5%;
+  margin-bottom:5%;
 }
 
+.failure_msg{
+  background:salmon; 
+  color:darkred;
+  font-size:1em;
+  border:solid 1px #093942;
+  border-radius:4px;
+  width:90%;
+  float:right;
+  margin-right:5%;
+  margin-bottom:5%;
+}
 
 /*------------------ chat styles -------------------*/
 .chat {
