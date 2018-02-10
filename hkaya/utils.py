@@ -30,7 +30,7 @@ def getCategory(category_id):
    return queryset
 
 
-def getStories(q_story_title = None, q_category = None , q_draft = 0, q_pages = 10, q_page_num = 1):
+def getStories(q_story_title = None, q_category = None , q_draft = 0, q_pages = 5, q_page_num = 1):
    
    queryset = Story.objects.all()
    if q_category is not None: 
