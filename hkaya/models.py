@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import date
-
+from django.core.exceptions import ValidationError
 # Create your models here.
 
 
@@ -14,17 +14,86 @@ class Category(models.Model):
 
 
 
+def user_directory_path(instance, filename):
+   # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+   return 'user_{0}/{1}'.format(instance.name_ar, filename)
+
 class Character(models.Model):
 
-    name_ar = models.CharField(max_length = 30)
-    name_fr = models.CharField(max_length = 30)
+    name_ar       = models.CharField(max_length = 30)
     short_bio_ar  = models.CharField(max_length = 500)
-    short_bio_fr  = models.CharField(max_length = 500)
-    
+    photo         = models.ImageField(upload_to = user_directory_path, blank = True)    
+ 
     def __str__(self):
         return self.name_ar
 
 
+    def add_entry(c_name = '', c_bio = '', c_photo = None ):
+        rs = {"success":True, "message":""}    
+
+        if c_name == '' or c_name == None:
+            rs["success"] = False
+            rs["message"] = rs['message'] + "<br> الشخصية لازملها اسم"
+        else: 
+            ins = Character.objects.all().filter(name_ar = c_name)  
+            if len(list(ins)) > 0:
+                rs['success'] = False
+                rs['message'] = rs['message'] + "<br> هذا الاسم مستعمل"
+                
+        if c_bio == '' or c_bio == None:    
+            rs['success'] = False
+            rs['message'] = rs["message"] + "<br> الشخصية لازملها تعريف"
+        if(rs['success']):
+            mycharacter = Character(name_ar = c_name, 
+                                    short_bio_ar = c_bio,
+                                    )
+            mycharacter.save()       
+            mycharacter.photo = c_photo
+            mycharacter.save()    
+        return rs
+    
+
+    def delete_entry(character_id):
+       character = Character.objects.filter(pk = character_id).first()      
+       if character is None:
+           return False
+       character.delete()
+       character = None
+       character = Character.objects.filter(pk = character_id).first() 
+       if character is None:
+           return True
+       else:
+           return False 
+
+    def update_entry(c_id = None, c_name = None , c_bio = None , c_photo = None):
+       query_response = {"success": True,
+                         "message": "معلومات الشخصية تعدلت"}
+       mycharacter = Character.objects.filter(pk = c_id).first()
+
+       if mycharacter is None:
+          query_response["success"] = False
+          query_response["message"] = "ما لقيناش لحكاية !"  
+          return query_response
+
+       if(c_name == ''):
+           conform = False
+           query_response["message"] = "لازم يسم للشخصية"
+           query_response["success"] = False
+           return query_response    
+
+       if(c_bio == ''):
+           conform = False
+           query_response["message"] = "الشخصية لازملها تعريف"
+           query_response["success"] = False
+           return query_response     
+
+       mycharacter.name_ar = c_name
+       mycharacter.short_bio_ar = c_bio
+       if(c_photo is not None):
+          mycharacter.photo = c_photo
+       mycharacter.save()      
+
+       return query_response
 
 class Story(models.Model):
 

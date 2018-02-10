@@ -4,19 +4,45 @@
         
 
 
-        {% block main_content_block %}
-          {% if category_item is None %}
-             <h2> no category </h2>
-          {% else %}
-             <h2> {{category_item.name_ar}} </h2> 
-          {% endif %}
-         {%  for story_item in story_list %}
+{% block main_content_block %}
+  {% if category_item is None %}
+     <h2> no category </h2>
+  {% else %}
+     <h2 class="centered-title"> {{category_item.name_ar}} </h2> 
+  {% endif %}
+ {%  for story_item in stories %}
+    <div class="story-icon">
           <a href="{{root_links.story}}/{{story_item.id}}/" >
-            <div class="story-icon"> 
-               <h3>{{ story_item.title_ar}}</h3>
-            </div>
+          <p id="story-title">{{ story_item.title_ar}}
+             <span class="date"> - {{ story_item.pub_date|date:"Y-m-d" }}</span><br>
+             <span class="synopsis">{{ story_item.synopsis_ar|truncatechars:100 }}</span>
+          </p>
           </a>
-         {% endfor %}
-        {% endblock %}
+     </div>
+ {% endfor %}
+
+ {% if stories.has_other_pages %}
+   <ul class="pagination">
+     {% if  stories.has_previous %}
+       <li><a href="?page={{ stories.previous_page_number }}">&laquo;</a></li>
+     {% else %}
+       <li classe="disabled"><span>&laquo;</span></li> 
+     {% endif %}
+     {% for i in stories.paginator.page_rage %}
+       {% if stories.number == i %}
+         <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+       {% else %}
+         <li><a href="?page={{ i }}">{{ i }}</a></li>  
+       {% endif %} 
+     {% endfor %} 
+     {% if  stories.has_next %}
+       <li><a class="active" href="?page={{ stories.next_page_number }}">&raquo;</a></li>
+     {% else %}
+       <li classe="disabled"><span>&raquo;</span></li> 
+     {% endif %}
+   </ul>
+ {% endif %}
+
+{% endblock %}
 
 

@@ -5,9 +5,10 @@
          
 {% block dynamic_js %}
 
-var character_list = [ 
-    {id:{{characters.0.id}},name:"{{characters.0.name_ar}}"}, 
-    {id:{{characters.1.id}},name:"{{characters.1.name_ar}}"}  
+var character_list = [
+   {% for character in characters %} 
+     {id:{{character.id}},name:"{{character.name_ar}}"}, 
+   {% endfor %}
 ];
          
 var csrf_token = '{{csrf_token}}';
@@ -65,6 +66,7 @@ $(document).ready(function() {
      textarea_tag.attr("rows","5");
      textarea_tag.attr("cols","50");
      textarea_tag.attr("id", new_elem.textarea_id);
+     textarea_tag.attr("style","direction:RTL;");
       
      header_div.append(close_tag).append(
                      minus_tag).append(

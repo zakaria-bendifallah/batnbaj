@@ -4,32 +4,25 @@
      
      
 
-        {% block main_content_block %}
-         {%  for story_item in story_list %}
-          <a href="{{root_links.story}}/{{story_item.id}}/" >
-            <div class="story-icon"> 
-               <h3>{{ story_item.title_ar}}</h3>
-            </div>
-          </a>
-         {% endfor %}
-        {% endblock %}
-      
+{% block main_content_block %}
+    {%  for story_item in story_list %}
+          <div class="story-icon">
+             <a href="{{root_links.story}}/{{story_item.id}}/" >
+               <p id="story-title">{{ story_item.title_ar}}
+               <span class="date"> - {{ story_item.pub_date|date:"Y-m-d" }}</span><br>
+               <span class="synopsis">{{ story_item.synopsis_ar|truncatechars:100 }}</span>
+               </p>
+             </a>
+          </div>
+    {% endfor %}
 
-        {% block secondary_content_block %} 
-          <div class="novelties"> 
-             <h3>الجديد</h3>   
-             <p><a href="">الجديد ١</a></p>
-             <p><a href="">الجديد ١</a></p>
-             <p><a href="">الجديد ١</a></p>
-             <p><a href="">الجديد ١</a></p>        
-           </div> 
-           <div class="novelties">
-             <h3>القديم</h3>  
-             <p><a href="">الجديد ١</a></p>
-             <p><a href="">الجديد ١</a></p>
-             <p><a href="">الجديد ١</a></p>
-             <p><a href="">الجديد ١</a></p>        
-           </div>      
-        {% endblock %}
+    <div class="categories-overview" >
+        {% for category in categories %}
+        <div class="category-snippet">
+            <h2 class="centered-title">{{category.name_ar}}</h3>
+        </div>  
+        {% endfor %}
+    </div>  
+{% endblock %}
       
 

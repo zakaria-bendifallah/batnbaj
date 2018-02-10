@@ -195,7 +195,7 @@ div.head-submenu input[type=text]{
   min-width:80%;
   width: 90%;
   margin:auto;
-  margin-bottom: 30%;
+  margin-bottom: 20%;
   text-align:right;
   border-radius:4%;
   border:solid 1px lightgray;
@@ -204,7 +204,7 @@ div.head-submenu input[type=text]{
 
 .novelties h3{
   color: white;
-  background:#055a6b;
+  background:darkred;
   padding-right:0.5em;
   padding-top:0;
   height:2em;
@@ -215,6 +215,9 @@ div.head-submenu input[type=text]{
 }
 
 
+.novelties h3:hover{
+  background: red;
+}
 
 .novelties p{
   padding-right:2%;
@@ -222,11 +225,47 @@ div.head-submenu input[type=text]{
   padding-bottom:3px;
   border-bottom:solid 1px lightgray;
 }
+
+/*-------- category menu -----------------------*/
+/*
+#category-menu h3{
+ background: darkred; 
+}
+
+#category-menu h3:hover{
+ background: red; 
+}
+*/
+
+/*-------- search bar --------------------------*/
+
+.search-tab{
+  width:90%;
+  margin:auto;
+  text-align:right;
+  border-radius:6%;
+  border:solid 1px darkgray;
+  padding:2%;
+  margin-bottom: 20%;
+}
+
+.search-tab h3{
+  color:#055a6b;
+  font-weight:bold;
+  display:inline;
+}
+
+.search-tab input{
+  float:left;
+  
+}
+
+/*-------- main content tab ----------------------*/
  
 .main-content{
   position:relative;
   width:100%;  
-  padding-bottom:80%;
+  padding-bottom:50%;
 }
 
 .footer{
@@ -236,7 +275,9 @@ div.head-submenu input[type=text]{
  border-top:solid 1px darkgray;  
  text-align:center;
  position:relative;
+ float:center;
  margin:auto;
+ /*margin-top:3em;*/
 }
 
 
@@ -258,6 +299,14 @@ div.head-submenu input[type=text]{
   text-align:right;
   display:inline-block;
   margin-bottom:5%;
+}
+
+.centered-title {
+  background:#047287;
+  color: white;
+  width: 40%;
+  margin:auto;
+  border-radius:5px;
 }
 
 /*---- admin panel ------------------*/
@@ -322,11 +371,41 @@ div.story-icon{
  border-radius:5px;
  border:1px solid gray;
  box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.3);
- float:right;
- right:5%;
+ margin:auto; 
  margin-bottom:5%;
+ overflow:auto;
 }
 
+div.story-icon p{
+  margin-right:5%;
+  text-align:right;
+  width:65%;
+  float:right; 
+  padding-right:2%;
+}
+
+.story-icon span#story-title {
+  background:white;
+  text-align:right;
+}
+
+.story-icon span.synopsis{
+  font-size:0.6em;
+  color:darkgray;
+  text-align:right;
+}
+
+.story-icon span.date{
+  color:darkgray;
+  font-size:0.7em;
+}
+
+.story-icon img{
+ width:30%; 
+ height:30%;
+ float:right;
+ right:0px;
+}
 
 div.story-icon:hover{
   border:1px solid #AE0009;
@@ -342,6 +421,23 @@ div.story-icon:hover{
 }
 .story-edit a:hover{
   font-weight:bold; 
+}
+
+
+/*------------------- category snippets (in index page) ------------*/
+div.categories-overview{
+  padding-top:30%;
+    
+}
+
+div.category-snippet{
+  float:right;
+  width:48%;
+  min-height:30%;
+}
+
+div.category-snippet h2{
+  width:90% 
 }
 
 /*------------------ add story styles--------------*/
@@ -374,7 +470,7 @@ div.story-icon:hover{
   float:right;
 }
 
-.zidhky.header p,select,input{
+.zidhky.header p,select,input,textarea{
    
   margin-bottom:3%; 
 }
@@ -484,10 +580,10 @@ div.zidhky.resp-container textarea{
   background:#d0e8ed; 
   color:#093942;
   font-size:1em;
+  text-align:right;
   border:solid 1px #093942;
   border-radius:4px;
   width:90%;
-  float:right;
   margin-right:5%;
   margin-bottom:5%;
 }
@@ -496,13 +592,65 @@ div.zidhky.resp-container textarea{
   background:salmon; 
   color:darkred;
   font-size:1em;
+  text-align:right;
   border:solid 1px #093942;
   border-radius:4px;
   width:90%;
-  float:right;
   margin-right:5%;
   margin-bottom:5%;
 }
+
+.error_message{
+  font-size:2em;
+  
+}
+
+/*------------------- pagination styles -------------*/
+.pagination{
+   text-align:center;
+}
+
+.pagination li{
+  display:inline;
+} 
+
+.pagination a{
+  border:solid 1px darkgray;
+  font-size:1em;
+  padding:0.5em 1em;
+  text-decoration:none;
+  background-color:white;
+  color:darkred;
+  transition: background-color .3s;
+}
+
+.pagination a.active{
+   background-color:salmon;
+   color:white;
+
+}
+
+.pagination a:hover:not(.active) {
+  background-color:white;
+  color:black;
+}
+
+/*------------ characters presentation page -------*/
+.character-container{
+   margin-bottom:30%; 
+  
+    
+}
+
+
+/*------------- story styles -----------------------*/
+
+.story-synopsis p{
+
+  border:solid 1px darkred;
+}
+
+
 
 /*------------------ chat styles -------------------*/
 .chat {
@@ -535,13 +683,13 @@ div.zidhky.resp-container textarea{
     background-color: rgba(255,255,255,0.9);
 }
 .chat .avatar img {
-    width: 38px;
-    height: 38px;
+    width: 60px;
+    height: 60px;
     margin:auto;
- /*   border-radius: 100%;
+    border-radius: 100%;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
-    -ms-border-radius: 100%; */
+    -ms-border-radius: 100%; 
     background-color: rgba(255,255,255,0.9);
     -webkit-touch-callout: none;
     -webkit-user-select: none;

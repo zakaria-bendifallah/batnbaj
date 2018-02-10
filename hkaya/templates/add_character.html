@@ -1,0 +1,68 @@
+﻿
+{% extends "main_template.html" %}
+
+{% load static %}
+         
+{% block dynamic_js %}
+
+$(document).ready(function() {
+
+});
+//load image if it is supplied
+function readURL(input) {
+   var url = input.value;
+   var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+   if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          $('#img').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+   }
+   else{
+      $('#img').attr('src', '/assets/no_preview.png');
+   }
+}
+
+{% endblock %}
+ 
+
+{% block main_content_block %}
+
+    <h3>زيد شخصية</h3>
+
+
+    <form id="zidhky-form" method="post"  enctype="multipart/form-data">
+       <div class="zidhky header">
+         {% csrf_token %}
+	  <h3>عرف الشخصية</h3> 
+	  <div>
+	    <p>الإسم </p>
+	    <input type="text" name="character_name" class="zidhky story_name"><br>        
+	 
+	    <p>نبذة</p>
+	      <textarea rows=5 name="character_bio" cols=50 class="zidhky synopsis"></textarea> <br>
+
+	    <p>صورة</p>
+            <input id="c-photo"  type="file" name="photo" onchange="readURL(this)" /><br>
+              <img id="img" src="#" alt="your image" />
+ 
+           <input id="data-submit" type="submit" value="ابعث">
+	  </div>
+       </div>  <!-- zidhky header -->
+    </form>
+
+    {% if rs is not None %}
+       {% if rs.success   %}
+         <p class="success_msg"> الشخصية تسجلت عندنا </p>
+       {% else %}
+         {% autoescape off %} 
+            <p class="failure_msg"> {{ rs.message }} </p>
+         {% endautoescape %}
+       {% endif %}
+    {% endif %}
+{% endblock %}
+
+
+
+
