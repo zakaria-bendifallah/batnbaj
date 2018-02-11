@@ -33,6 +33,8 @@ def viewCategory(request, category_id):
 
 def viewStory(request, story_id):
 
+    #update the number of views of the story
+    setStoryViews(story_id, request)       
     root_links = getRootLinks() 
     categories = getCategories()
     characters = getCharacters()

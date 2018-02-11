@@ -5,9 +5,11 @@
     
  
 
-      {% block main_content_block %}
+{% block main_content_block %}
        <div class="fb-share-button" data-href="http://localhost:8000/hkaya/hky/25/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8000%2Fhkaya%2Fhky%2F25%2F&amp;src=sdkpreparse">Partager</a></div>
-       <h3 > {{story_item.title_ar}}  </h3>
+      <p style="display:inline" >{{ story_item.num_views }} : شوهدت </p>
+      <p style="display:inline">{{ story_item.pub_date|date:"Y-m-d" }} : خرجت في </p>
+       <h3 > {{story_item.title_ar}}  </h3> 
        <p class="story-synopsys"> {{ story_item.synopsis_ar }} </p>
        <ol class="chat">
         {% for conversation_item in conversation_list %}
@@ -20,6 +22,6 @@
           </li>
         {% endfor %}
        </ol>
-    {% endblock %}     
+{% endblock %}     
 
 

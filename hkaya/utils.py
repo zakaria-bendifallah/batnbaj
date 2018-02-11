@@ -56,6 +56,13 @@ def getStory(story_id):
    queryset = Story.objects.get(pk = story_id)
    return queryset 
 
+def setStoryViews(story_id, request):
+    viewed = request.session.get('{}'.format(story_id),False)
+    if not viewed:
+        Story.increment_views(story_id) 
+        request.session["{}".format(story_id)] = True
+        request.session.modified = True
+
 
 def getCharacters(c_character_name = None, c_pages = 10, c_page_num = 1):
    queryset = Character.objects.all();

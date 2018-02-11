@@ -97,11 +97,12 @@ class Character(models.Model):
 
 class Story(models.Model):
 
-   title_ar = models.CharField(max_length = 100 )
+   title_ar    = models.CharField(max_length = 100 )
    synopsis_ar = models.CharField(max_length = 500, blank=True)
-   pub_date = models.DateField()
-   draft    = models.IntegerField(default = 1)
-   category = models.ForeignKey(Category,on_delete=models.CASCADE, default = 1)   
+   pub_date    = models.DateField()
+   draft       = models.IntegerField(default = 1)
+   category    = models.ForeignKey(Category,on_delete=models.CASCADE, default = 1)   
+   num_views   = models.IntegerField(default = 0)
    def __str__(self):
        return self.title_ar
    # add a new story
@@ -158,17 +159,23 @@ class Story(models.Model):
 
    # delete an existing story
    def delete_entry(story_id):
-       story = Story.objects.filter(pk = story_id).first()      
-       if story is None:
+       my_story = Story.objects.filter(pk = story_id).first()      
+       if my_story is None:
            return False
-       story.delete()
-       story = None
-       story = Story.objects.filter(pk = story_id).first() 
-       if story is None:
+       my_story.delete()
+       my_story = None
+       my_story = Story.objects.filter(pk = story_id).first() 
+       if my_story is None:
            return True
        else:
            return False 
-
+   
+   def increment_views(story_id):
+       my_story = Story.objects.filter(pk = story_id).first()
+       if my_story is None:
+           return False
+       my_story.num_views = my_story.num_views + 1
+       my_story.save() 
 
 class Response(models.Model):
   
