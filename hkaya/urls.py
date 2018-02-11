@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     url(r'^index/', views.index, name='index'),
-    url(r'^chkoun/', views.viewChkoun, name='index'),
+    url(r'^chkoun/', views.viewChkoun, name='chkoun'),
     url(r'^hky/(\d+)/',  views.viewStory , name='hky'),
     url(r'^cat/(\d+)/',  views.viewCategory , name='cat'),
 
@@ -19,4 +19,5 @@ urlpatterns = [
     url(r'^zidhky/ajax/delete_character/',  views.ajaxDeleteCharacter , name='deletecharacter'),
     url(r'^zidhky/modify_character/(\d+)/',  views.viewModifyCharacter , name='modifycharacter'),
 
+    url(r'^zidhky/logout/',  views.viewLogout , name='logout'),
 ]

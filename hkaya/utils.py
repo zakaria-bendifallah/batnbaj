@@ -4,19 +4,30 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # == helper functions ==
 
-def getRootLinks():
+def getRootLinks(request):
    root_links = {
       'index': "http://localhost:8000/hkaya/index",
       'chkoun': "http://localhost:8000/hkaya/chkoun",
       'category' : "http://localhost:8000/hkaya/cat", 
       'story' : "http://localhost:8000/hkaya/hky",
-      'add_story' : "http://localhost:8000/hkaya/zidhky/add_story",
-      'search_story' : "http://localhost:8000/hkaya/zidhky/search_story",
-      'modify_story' : "http://localhost:8000/hkaya/zidhky/modify_story",
-      'add_character' : "http://localhost:8000/hkaya/zidhky/add_character",
-      'search_character' : "http://localhost:8000/hkaya/zidhky/search_character",
-      'modify_character' : "http://localhost:8000/hkaya/zidhky/modify_character"
-   } 
+   }
+
+   if request.user.is_authenticated:
+      root_links.update({
+          'add_story' : "http://localhost:8000/hkaya/zidhky/add_story",
+          'search_story' : "http://localhost:8000/hkaya/zidhky/search_story",
+          'modify_story' : "http://localhost:8000/hkaya/zidhky/modify_story",
+          'add_character' : "http://localhost:8000/hkaya/zidhky/add_character",
+          'search_character' : "http://localhost:8000/hkaya/zidhky/search_character",
+          'modify_character' : "http://localhost:8000/hkaya/zidhky/modify_character",
+          'logout' : "http://localhost:8000/hkaya/zidhky/logout",
+          'username': request.user.username,
+          'site_admin': True
+      }) 
+   else:
+      root_links.update({
+          'site_admin': False
+      })
    return root_links
 
 

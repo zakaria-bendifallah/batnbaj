@@ -201,4 +201,3 @@ class Response(models.Model):
            queryset.delete()          
     
 
-

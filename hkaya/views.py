@@ -3,6 +3,8 @@ from hkaya.utils import *
 from django.http import HttpResponse,JsonResponse
 from hkaya.models import Category, Story, Response, Character   
 from django.views.decorators.csrf import ensure_csrf_cookie,csrf_exempt
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 import json
 # Create your views here.
 
@@ -11,7 +13,7 @@ import json
 # == HTML views ==----------------------
 
 def index(request):
-    root_links = getRootLinks() 
+    root_links = getRootLinks(request) 
     categories = getCategories()
     characters = getCharacters()
     story_list = getStories() 
@@ -22,7 +24,7 @@ def viewCategory(request, category_id):
 
     if request.method == "GET":
         page_num = request.GET.get('page','1')
-    root_links = getRootLinks() 
+    root_links = getRootLinks(request) 
     categories = getCategories()
     characters = getCharacters()
     stories = getStories(q_category = category_id, 
@@ -35,7 +37,7 @@ def viewStory(request, story_id):
 
     #update the number of views of the story
     setStoryViews(story_id, request)       
-    root_links = getRootLinks() 
+    root_links = getRootLinks(request) 
     categories = getCategories()
     characters = getCharacters()
     story_item = getStory(story_id) 
@@ -44,7 +46,7 @@ def viewStory(request, story_id):
 
 def viewChkoun(request):
      
-    root_links = getRootLinks() 
+    root_links = getRootLinks(request) 
     categories = getCategories()
     characters = getCharacters()
     return render(request, "chkoun.html", locals())
@@ -52,7 +54,7 @@ def viewChkoun(request):
 
 def viewAddStory(request):
 
-    root_links = getRootLinks() 
+    root_links = getRootLinks(request) 
     categories = getCategories()
     characters = getCharacters()
 
@@ -60,7 +62,7 @@ def viewAddStory(request):
 
 def viewSearchStory(request):
 
-    root_links = getRootLinks() 
+    root_links = getRootLinks(request) 
     categories = getCategories()
     characters = getCharacters()
 
@@ -88,7 +90,7 @@ def viewSearchStory(request):
 
 def viewModifyStory(request, story_id):
         
-    root_links = getRootLinks() 
+    root_links = getRootLinks(request) 
     categories = getCategories()
     characters = getCharacters()
     story_item = getStory(story_id)
@@ -99,7 +101,7 @@ def viewModifyStory(request, story_id):
 
 def viewAddCharacter(request):
 
-    root_links = getRootLinks() 
+    root_links = getRootLinks(request) 
     categories = getCategories()
     characters = getCharacters()
     rs = None
@@ -116,7 +118,7 @@ def viewAddCharacter(request):
 
 def viewSearchCharacter(request):
 
-    root_links = getRootLinks() 
+    root_links = getRootLinks(request) 
     categories = getCategories()
     characters = getCharacters()
  
@@ -133,7 +135,7 @@ def viewSearchCharacter(request):
 
 def viewModifyCharacter(request, character_id):
         
-    root_links = getRootLinks() 
+    root_links = getRootLinks(request) 
     categories = getCategories()
     characters = getCharacters()
     character_item = getCharacter(character_id)
@@ -148,6 +150,10 @@ def viewModifyCharacter(request, character_id):
        
     return render(request, "modify_character.html", locals())
 
+
+def viewLogout(request):
+    logout(request)
+    return redirect("index") 
 
 # -- AJAX views ----------------------------
 

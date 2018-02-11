@@ -128,14 +128,20 @@
           </div>  <!-- class:footer -->
         </div>  
         <div class="admin-tab">
-          <div class="admin-panel"> 
-             <h3>مشرف &nbsp<i class="fa fa-chevron-circle-left"></i></h3>   
-             <p><a href="{{root_links.add_story}}">زيد حكاية</a></p>
-             <p><a href="{{root_links.search_story}}">حوس حكاية</a></p>
-             <p><a href="{{root_links.add_character}}">زيد شخصية</a></p>
-             <p><a href="{{root_links.search_character}}">حوس شخصية</a></p>
-             <p><a href="">خروج</a></p>
-           </div> 
+	  {% if root_links.site_admin %}
+             <div class="admin-panel"> 
+                <h3 style="background-color:#e15c10">مشرف &nbsp<i class="fa fa-chevron-circle-left"></i></h3>   
+		<p>{{ root_links.username }} مرحبا </p>
+		<p><a href="{{root_links.logout}}">خروج</a></p>
+	     </div>
+             <div class="admin-panel"> 
+                <h3 style="background-color:#e15c10">تقدر تدير &nbsp<i class="fa fa-chevron-circle-left"></i></h3>   
+                <p><a href="{{root_links.add_story}}">زيد حكاية</a></p>
+                <p><a href="{{root_links.search_story}}">حوس حكاية</a></p>
+                <p><a href="{{root_links.add_character}}">زيد شخصية</a></p>
+                <p><a href="{{root_links.search_character}}">حوس شخصية</a></p>
+             </div> 
+	  {% endif %}
         </div>  <!-- class:admin-tab -->
     </div>  
     </div>

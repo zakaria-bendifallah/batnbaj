@@ -645,11 +645,21 @@ div.zidhky.resp-container textarea{
 /*------------- story styles -----------------------*/
 
 .story-synopsis p{
-
   border:solid 1px darkred;
 }
 
 
+.story-info{
+  border:solid 1px gray;
+  background-color:lightgray;
+  font-size:small;
+  border-radius:4%;
+  margin-right:2%;
+  margin-left:2%;
+}
+.story-info p{
+  padding:0;
+}
 
 /*------------------ chat styles -------------------*/
 .chat {

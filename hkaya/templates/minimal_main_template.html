@@ -1,0 +1,93 @@
+
+{% load static %}
+
+<html lang="ar">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <link rel="stylesheet" type="text/css" href={% static "pstyle.css" %}>
+    <!--<link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet"> -->
+    <!--<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">-->
+
+    <script src="https://use.fontawesome.com/fd5d71e4bc.js"></script>
+
+    <script type="text/javascript" src={% static "js/jquery-3.2.1.min.js" %}></script> 
+    <script type="text/javascript" src={% static "js/my_js_code.js" %}></script>
+    <script>
+      $(document).ready(function() { 
+        $("#category-menu").on("click",".active", (function(){
+            var menu_group = $(this).next();
+            menu_group.slideUp();
+            $(this).removeClass("active").addClass("hidden");
+        }));
+        $("#category-menu").on("click",".hidden", (function(){
+            var menu_group = $(this).next();
+            menu_group.slideDown();
+            $(this).removeClass("hidden").addClass("active");
+        }));
+
+        $("#character-menu").on("click",".active", (function(){
+            var menu_group = $(this).next();
+            menu_group.slideUp();
+            $(this).removeClass("active").addClass("hidden");
+        }));
+        $("#character-menu").on("click",".hidden", (function(){
+            var menu_group = $(this).next();
+            menu_group.slideDown();
+            $(this).removeClass("hidden").addClass("active");
+        })); 
+
+      });
+      </script>
+      <div id="fb-root"></div>
+      <script>
+         (function(d, s, id) {
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) return;
+         js = d.createElement(s); js.id = id;
+         js.src = 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10';
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+       {% block dynamic_js  %}
+       {% endblock %}
+     </script>
+    <title>باجي و باثمان</title>
+    <meta name="viewport" content="initial-scale=1.0,  maximum-scale=1.0, width=device-width">
+  </head>
+  <body>
+    <div class="container">
+     <div class="head-banner">
+      <div class="head-logo">
+        <h3>باجي و باثمان</h3>
+      </div>
+
+      <div class="head-menu">
+      </div> 
+
+      <div class="head-submenu">
+          <p>    
+          </p>
+      </div>
+    </div>
+
+    <div class="core-content">
+        <div class="lateral-tab">
+        </div> 
+
+        <div class="main-tab">
+          <div class="main-content" style="text-align:center"> 
+            {% block main_content_block  %}
+               usually contains stories or story links    
+            {% endblock %}
+          </div>
+          <div class="footer">
+            <p>Designed by: bazik</p>
+            <p>مازالها فارغة</p>
+          </div>  <!-- class:footer -->
+        </div>  
+
+        <div class="admin-tab">
+        </div>  <!-- class:admin-tab -->
+    </div>  
+    </div>
+  </body>
+</html>
