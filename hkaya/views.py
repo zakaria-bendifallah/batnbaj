@@ -42,6 +42,7 @@ def viewStory(request, story_id):
     characters = getCharacters()
     story_item = getStory(story_id) 
     conversation_list = getConversation(story_id) 
+    enrich_conversation_text(conversation_list)
     return render(request, "story.html", locals())
 
 def viewChkoun(request):

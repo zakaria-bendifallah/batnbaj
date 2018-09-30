@@ -1,26 +1,29 @@
 
 from hkaya.models import Category, Story, Response, Character  
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from hkaya.text_utils import * 
 
 # == helper functions ==
 
 def getRootLinks(request):
+   ''' loads the root links of the website main template
+   '''
    root_links = {
-      'index': "http://localhost:8000/hkaya/index",
-      'chkoun': "http://localhost:8000/hkaya/chkoun",
-      'category' : "http://localhost:8000/hkaya/cat", 
-      'story' : "http://localhost:8000/hkaya/hky",
+      'index': "/hkaya/index",
+      'chkoun': "/hkaya/chkoun",
+      'category' : "/hkaya/cat", 
+      'story' : "/hkaya/hky",
    }
 
    if request.user.is_authenticated:
       root_links.update({
-          'add_story' : "http://localhost:8000/hkaya/zidhky/add_story",
-          'search_story' : "http://localhost:8000/hkaya/zidhky/search_story",
-          'modify_story' : "http://localhost:8000/hkaya/zidhky/modify_story",
-          'add_character' : "http://localhost:8000/hkaya/zidhky/add_character",
-          'search_character' : "http://localhost:8000/hkaya/zidhky/search_character",
-          'modify_character' : "http://localhost:8000/hkaya/zidhky/modify_character",
-          'logout' : "http://localhost:8000/hkaya/zidhky/logout",
+          'add_story' : "/hkaya/zidhky/add_story",
+          'search_story' : "/hkaya/zidhky/search_story",
+          'modify_story' : "/hkaya/zidhky/modify_story",
+          'add_character' : "/hkaya/zidhky/add_character",
+          'search_character' : "/hkaya/zidhky/search_character",
+          'modify_character' : "/hkaya/zidhky/modify_character",
+          'logout' : "/hkaya/zidhky/logout",
           'username': request.user.username,
           'site_admin': True
       }) 
@@ -97,3 +100,17 @@ def getConversation(story_id):
    queryset = Response.objects.all().filter(story = story_id).order_by('id')
    conversation = list(queryset)
    return conversation
+
+
+#################################################################
+## conversation text decoration 
+#################################################################
+def enrich_conversation_text(conversation_list):
+    ''' enriches the conversation texts with the following:
+            - links identification and wrapping in <a> tags
+    '''
+    for response in conversation_list:
+        response.text_ar = add_new_line(response.text_ar)
+        response.text_ar = add_url_tags(response.text_ar) 
+        
+        print(response.text_ar) 

@@ -16,7 +16,7 @@
            <li {% cycle 'class="self"' 'class="other"' %}>
              <div class="avatar"><img src="{{conversation_item.character.photo.url}}" draggable="false"/></div>
              <div class="msg">
-               <p>{{conversation_item.text_ar}}</p>
+               <p>{{conversation_item.text_ar|safe}}</p>
                <time>20:17</time>
             </div>
           </li>
